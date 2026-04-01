@@ -78,47 +78,70 @@ exports.register = async (req, res) => {
 
 // LOGIN
 exports.login = async (req, res) => {
+
   try {
-    const email = req.body.email;
-    const mobile = req.body.mobile;
-    const password = req.body.password;
 
-    if (!password || (!email && !mobile)) {
+    const { email, password } = req.body;
+ 
+    if (!email || !password) {
+
       return res.status(400).json({
+
         message: "Email or mobile and password are required"
+
       });
+
     }
 
-    let user;
+    const isEmail = email.includes("@");
+ 
+    const user = await User.findOne(
 
-    if (email) {
-      const cleanEmail = email.trim().toLowerCase();
-      user = await User.findOne({ email: cleanEmail });
-    } else if (mobile) {
-      user = await User.findOne({ mobile });
-    }
+      isEmail
 
-    if (!user) {
-      return res.status(400).json({ message: "Invalid credentials" });
-    }
+        ? { email: email.trim().toLowerCase() }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid credentials" });
-    }
+        : { mobile: email }
 
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
     );
+ 
+    if (!user) {
 
+      return res.status(400).json({ message: "Invalid credentials" });
+
+    }
+ 
+    const isMatch = await bcrypt.compare(password, user.password);
+ 
+    if (!isMatch) {
+
+      return res.status(400).json({ message: "Invalid credentials" });
+
+    }
+ 
+    const token = jwt.sign(
+
+      { id: user._id },
+
+      process.env.JWT_SECRET,
+
+      { expiresIn: "1h" }
+
+    );
+ 
     res.json({
-      message: "Login successful",
-      token: token
-    });
 
+      message: "Login successful",
+
+      token
+
+    });
+ 
   } catch (error) {
+
     res.status(500).json({ message: error.message });
+
   }
+
 };
+ 
