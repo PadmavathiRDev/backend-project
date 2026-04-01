@@ -1,6 +1,6 @@
 const { createOrderService } = require("../services/paymentService");
 const verifySignature = require("../utils/verifySignature");
-const Subscription = require("../models/subscription");
+const Subscription = require("../models/Subscription");
 
 exports.createOrder = async (req, res) => {
   try {
