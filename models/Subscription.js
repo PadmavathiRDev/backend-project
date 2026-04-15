@@ -5,6 +5,10 @@ const schema = new mongoose.Schema({
   plan: String,
   paymentId: String,
   status: String,
+
+  startDate: Date,
+  endDate: Date,
+
   createdAt: {
     type: Date,
     default: Date.now
