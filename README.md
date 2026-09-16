@@ -1,8 +1,13 @@
-# Backend Project
+# Website Builder Application— Backend Project
 
 A RESTful backend application built using Node.js, Express.js and MongoDB.
 
-This project provides backend APIs for authentication, payments, invoices, blogging and website-builder functionality.
+A backend service for a no-code, drag-and-drop website builder.
+The application provides APIs for user authentication, project management,
+builder blocks, payments, invoices and blogging.
+
+The backend integrates MongoDB for data persistence, Razorpay for payments,
+and AWS S3 for image storage.
 
 ## Features
 
