@@ -1,12 +1,23 @@
 {
   "name": "website-builder-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "RESTful backend application for a no-code website builder built with Node.js, Express.js and MongoDB.",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
+  "start": "node server.js",
+  "dev": "nodemon server.js"
+},
+  "keywords": [
+  "nodejs",
+  "express",
+  "mongodb",
+  "rest-api",
+  "backend",
+  "website-builder",
+  "razorpay",
+  "aws-s3",
+  "jwt"
+],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
