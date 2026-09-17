@@ -1,18 +1,38 @@
 const mongoose = require("mongoose");
 
-const schema = new mongoose.Schema({
-  userId: String,
-  plan: String,
-  paymentId: String,
-  status: String,
+const subscriptionSchema = new mongoose.Schema({
+  userId: {
+    type: String,
+    required: true,
+  },
 
-  startDate: Date,
-  endDate: Date,
+  planName: {
+    type: String,
+    required: true,
+  },
 
-  createdAt: {
+  amount: {
+    type: Number,
+    default: 0,
+  },
+
+  startDate: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
+
+  expiryDate: {
+    type: Date,
+    default: null,
+  },
+
+  status: {
+    type: String,
+    default: "Active",
+  },
 });
 
-module.exports = mongoose.model("Subscription", schema);
+module.exports = mongoose.model(
+  "Subscription",
+  subscriptionSchema
+);

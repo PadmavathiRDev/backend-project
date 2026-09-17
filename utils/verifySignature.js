@@ -1,12 +1,37 @@
 const crypto = require("crypto");
 
-module.exports = (data) => {
-  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = data;
+const verifySignature = (
+  razorpay_order_id,
+  razorpay_payment_id,
+  razorpay_signature
+) => {
+  try {
+    const body =
+      razorpay_order_id +
+      "|" +
+      razorpay_payment_id;
 
-  const generated_signature = crypto
-    .createHmac("sha256", process.env.KEY_SECRET)
-    .update(razorpay_order_id + "|" + razorpay_payment_id)
-    .digest("hex");
+    const expectedSignature =
+      crypto
+        .createHmac(
+          "sha256",
+          process.env.RAZORPAY_KEY_SECRET
+        )
+        .update(body.toString())
+        .digest("hex");
 
-  return generated_signature === razorpay_signature;
+    return (
+      expectedSignature ===
+      razorpay_signature
+    );
+  } catch (error) {
+    console.log(
+      "Signature Verification Error:",
+      error
+    );
+
+    return false;
+  }
 };
+
+module.exports = verifySignature;

@@ -1,15 +1,26 @@
-const PLANS = {
+const plans = {
+
   BASIC: {
-    name: "Basic",
-    amount: 4000
+
+    name: "Basic Plan",
+
+    amount: 4000,
   },
+
+
   BUSINESS: {
-    name: "Business",
-    amount: 15000
+
+    name: "Business Plan",
+
+    amount: 15000,
   },
+
   ADVANCED: {
-    name: "Advanced",
-    amount: 18000
-  }
+
+    name: "Advanced Plan",
+
+    amount: 28000,
+  },
 };
-module.exports = PLANS;
+
+module.exports = plans;
